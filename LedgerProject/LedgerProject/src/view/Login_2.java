@@ -77,7 +77,7 @@ public class Login_2 {
 
 	public void SET_IMG_Area() {
 
-		ImageIcon img = new ImageIcon("images/mainimg.png");
+		ImageIcon img = new ImageIcon("images/tree.png");
 		JLabel jl = new JLabel(img);
 		jl.setSize(200, 224);
 		jl.setLocation(75, 80);
