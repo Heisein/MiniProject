@@ -8,6 +8,7 @@ public class Run {
 		new FirstLogin_1();
 		//new LedgerBoard(u);
 		
+		System.out.println("asdf");
 		//new CategoryBoard();
 		//new CategoryList();
 	}
