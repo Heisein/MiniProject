@@ -107,7 +107,7 @@ public class Login_2 {
 				User loginUser = users.loginMethod(jta[0].getText(), userPwd);
 				if(loginUser != null){
 					System.out.println("로그인 성공!" + loginUser.getUserID());
-					new LedgerBoard(loginUser);
+					new MainScreen_14();
 					jf.setVisible(false);
 				}else{
 					System.out.println("아이디 혹은 비밀번호가 틀렸습니다.");

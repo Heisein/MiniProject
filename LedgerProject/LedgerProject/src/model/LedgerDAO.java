@@ -13,6 +13,10 @@ public class LedgerDAO{
 	ArrayList<Ledger> ledgers = new ArrayList<Ledger>();
 	String fileName;
 	String cardNum;
+	
+	public LedgerDAO() {
+		
+	}
 
 	public LedgerDAO(User user) {
 		this.user = user;

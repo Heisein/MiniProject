@@ -13,18 +13,22 @@ public class MainScreen_14 {
 	JPanel jp = new JPanel();
 
 	public MainScreen_14() {
+		
 		SET_IMG_Area();
 		SET_Pannels_Area();
 		SET_Label_Area();
 		
-		jf.setSize(360, 600);
-
+		jf.setSize(370, 600);
+		
 		jp.setBackground(new Color(117, 102, 205));
 		jp.setLayout(null);
-
-		jf.add(jp);
+		
+		ScrollPane sp = new ScrollPane();
+		sp.add(jp);
+		jp.setPreferredSize(new Dimension(320,600));
+		
+		jf.add(sp);
 		jf.setVisible(true);
-		jp.setVisible(true);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -53,11 +57,11 @@ public class MainScreen_14 {
 			sub[i].setLayout(null);
 		}
 		
-		sub[0].setSize(320,92);
+		sub[0].setSize(300,92);
 		sub[0].setLocation(15,304);
-		sub[1].setSize(320,50);
+		sub[1].setSize(300,50);
 		sub[1].setLocation(15,402);
-		sub[2].setSize(320,92);
+		sub[2].setSize(300,92);
 		sub[2].setLocation(15,458);
 		
 		JLabel jl[] = new JLabel[8];
@@ -106,12 +110,12 @@ public class MainScreen_14 {
 	
 	public void SET_Label_Area() {
 		JLabel jl[] = new JLabel[2];
-		ImageIcon img = new ImageIcon("menu.png");
-		jl[0] = new JLabel("11월 소비액");
+		ImageIcon img = new ImageIcon("images/menu.png");
+		jl[0] = new JLabel("");
 		jl[1] = new JLabel(img);
 
 		jl[0].setLocation(20, -20);
-		jl[1].setLocation(270, -20);
+		jl[1].setLocation(260, -20);
 
 		for (int i = 0; i < jl.length; i++) {
 			jl[i].setSize(100, 100);
