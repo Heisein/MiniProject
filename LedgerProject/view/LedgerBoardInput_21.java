@@ -37,7 +37,7 @@ public class LedgerBoardInput_21 {
 		jl_back.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new MainScreen_14();
+				//new CategoryList();
 				jf.setVisible(false);
 			}
 		});
@@ -59,7 +59,7 @@ public class LedgerBoardInput_21 {
 		jl_menu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new MenuView_28();
+				//new CategoryList();
 				jf.setVisible(false);
 			}
 		});
@@ -159,15 +159,15 @@ public class LedgerBoardInput_21 {
 		    
 			
 			//상세보기
-			ImageIcon moreImg = new ImageIcon("images/arrow_right.png");
+			ImageIcon moreImg = new ImageIcon("images/more.png");
 			more[i] = new JLabel(moreImg);
 			more[i].setSize(50, 55);
 			more[i].setLocation(290, i*55);
 			more[i].setVisible(true);
-			more[0].addMouseListener(new MouseAdapter() {
+			more[i].addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					new CategoryList_23();
+					//new SignInCheck();
 					jf.setVisible(false);
 				}
 			});

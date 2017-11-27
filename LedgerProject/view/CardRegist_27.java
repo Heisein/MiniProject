@@ -125,15 +125,6 @@ public class CardRegist_27 {
 		jl[0] = new JLabel("Ä«µå µî·Ï");
 		jl[1] = new JLabel("È®ÀÎ");
 
-		jl[1].addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				new MainScreen_14();
-				jf.setVisible(false);
-			}
-		});
-		
 		jl[0].setSize(100, 20);
 		jl[0].setLocation(140, 20);
 		jl[0].setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 16));
