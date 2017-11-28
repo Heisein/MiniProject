@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import model.User;
 import model.UserDAO;
 //소비이력상세 편집
 public class CategoryDetailModify_25  {
@@ -22,15 +23,15 @@ public class CategoryDetailModify_25  {
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
 	
-	UserDAO users=new UserDAO();
+	User user;
 	
-	public CategoryDetailModify_25(UserDAO user) {
+	public CategoryDetailModify_25(User User) {
 		jf.setSize(360,600);
 		jf.setTitle("용돈조");
 		SET_IMG_Area();
 		SET_Text_And_Label_Area();
 		SET_Label_Area();
-		users=user;
+		this.user=User;
 		jp.setBackground(new Color(117, 102, 205));
 		jp.setLayout(null);
 		jf.add(jp);
@@ -148,7 +149,7 @@ public class CategoryDetailModify_25  {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				new LedgerBoardInput_21(users).point(jf.getLocation());
+				new LedgerBoardInput_21(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});

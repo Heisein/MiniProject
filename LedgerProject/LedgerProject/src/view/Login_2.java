@@ -25,7 +25,7 @@ public class Login_2 {
 	JTextField jta[] = new JTextField[2];
 	JLabel jl[] = new JLabel[2];
 	
-	UserDAO users = new UserDAO();
+	UserDAO user;
 
 	public Login_2() {
 
@@ -105,10 +105,10 @@ public class Login_2 {
 					userPwd += pass[i];
 				}
 				
-				User loginUser = users.loginMethod(jta[0].getText(), userPwd);
+				User loginUser = user.loginMethod(jta[0].getText(), userPwd);
 				if(loginUser != null){
 					System.out.println("로그인 성공!" + loginUser.getUserID());
-					new MainScreen_14(users).point(jf.getLocation());
+					new MainScreen_14(loginUser).point(jf.getLocation());
 					jf.setVisible(false);
 				}else{
 					System.out.println("아이디 혹은 비밀번호가 틀렸습니다.");

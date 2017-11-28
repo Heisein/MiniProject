@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import model.User;
 import model.UserDAO;
 
 public class CardRegist_27 {
@@ -26,13 +27,13 @@ public class CardRegist_27 {
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
 	
-	UserDAO users = new UserDAO();
+	User user;
 
-	public CardRegist_27(UserDAO user) {
+	public CardRegist_27(User User) {
 		SET_Text_And_Label_Area();
 		SET_IMG_Area();
 		SET_Label_Area();
-		users=user;
+		this.user=User;
 		jf.setSize(360, 600);
 		jp.setBackground(new Color(117, 102, 205));
 		jp.setLayout(null);
@@ -114,7 +115,7 @@ public class CardRegist_27 {
 		jl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new MainScreen_14(users).point(jf.getLocation());
+				new MainScreen_14(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -143,7 +144,7 @@ public class CardRegist_27 {
 		jl[1].addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new MainScreen_14(users).point(jf.getLocation());
+				new MainScreen_14(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});

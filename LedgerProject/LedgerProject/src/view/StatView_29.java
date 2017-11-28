@@ -7,6 +7,7 @@ import java.io.*;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.swing.*;
 
+import model.User;
 import model.UserDAO;
 
 public class StatView_29 {
@@ -14,14 +15,14 @@ public class StatView_29 {
 	JFrame jf = new JFrame("¿ëµ·Á¶");
 	JPanel jp = new JPanel();
 
-	UserDAO users= new UserDAO();
+	User user;
 	
-	public StatView_29(UserDAO user) {
+	public StatView_29(User User) {
 		SET_Graph_Area();
 		SET_Pannels_Area();
 		SET_Label_Area();
 		
-		users=user;
+		this.user=User;
 
 		jf.setSize(360, 600);
 

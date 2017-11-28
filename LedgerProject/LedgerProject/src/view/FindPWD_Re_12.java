@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import model.User;
 import model.UserDAO;
 
 public class FindPWD_Re_12 {
@@ -16,7 +17,7 @@ public class FindPWD_Re_12 {
 	JPanel sub = new JPanel();
 	JLabel jl[] = new JLabel[2];
 	
-	UserDAO users = new UserDAO();
+	User user;
 	
 	public FindPWD_Re_12(){
 		

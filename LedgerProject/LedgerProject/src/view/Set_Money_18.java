@@ -14,6 +14,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import model.User;
 import model.UserDAO;
 
 public class Set_Money_18 {
@@ -21,9 +22,9 @@ public class Set_Money_18 {
 	JPanel jp =new JPanel();
 	JPanel sub =new JPanel();
 	JPanel sub1 =new JPanel();
-	UserDAO users = new UserDAO();
+	User user;
 	
-	public Set_Money_18(UserDAO user) {
+	public Set_Money_18(User User) {
 		SET_IMG_Area();
 		SET_Label_Area();
 		Show_Money();
@@ -34,7 +35,7 @@ public class Set_Money_18 {
 		jf.add(jp);
 		jf.setVisible(true);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		users=user;
+		this.user=User;
 	}
 	
 	public void Show_Money() {
@@ -146,7 +147,7 @@ public class Set_Money_18 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				new Budget_Set1_17(users).point(jf.getLocation());
+				new Budget_Set1_17(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -170,7 +171,7 @@ public class Set_Money_18 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				new MainScreen_14(users).point(jf.getLocation());
+				new MainScreen_14(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});

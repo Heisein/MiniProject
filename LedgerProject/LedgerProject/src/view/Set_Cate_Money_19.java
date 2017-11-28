@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import model.User;
 import model.UserDAO;
 
 public class Set_Cate_Money_19 {
@@ -17,9 +18,9 @@ public class Set_Cate_Money_19 {
 	JPanel jp =new JPanel();
 	JPanel sub =new JPanel();
 	JPanel sub1 =new JPanel();
-	UserDAO users = new UserDAO();
+	User user;
 	
-	public Set_Cate_Money_19(UserDAO user) {
+	public Set_Cate_Money_19(User User) {
 		SET_IMG_Area();
 		SET_Label_Area();
 		Show_Money();
@@ -30,7 +31,7 @@ public class Set_Cate_Money_19 {
 		jf.add(jp);
 		jf.setVisible(true);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		users=user;
+		this.user=User;
 	}
 	public void Show_Money() {
 		sub1.setSize(360,110);

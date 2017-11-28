@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
+import model.User;
 import model.UserDAO;
 
 public class FindIDResult_9 {
@@ -15,7 +16,7 @@ public class FindIDResult_9 {
 	JPanel sub = new JPanel();
 	JLabel jl[] = new JLabel[2];
 	
-	UserDAO users = new UserDAO();
+	User user;
 	public FindIDResult_9(){
 		
 		JoinResult_panel();

@@ -11,6 +11,7 @@ import javax.imageio.stream.FileImageOutputStream;
 import javax.swing.*;
 
 import model.FileDAO;
+import model.User;
 import model.UserDAO;
  
 
@@ -18,14 +19,13 @@ public class MainScreen_14 {
 	
 	JFrame jf = new JFrame("¿ëµ·Á¶");
 	JPanel jp = new JPanel();
-	UserDAO users = new UserDAO();
-
-	public MainScreen_14(UserDAO User) {
+	User user;
+	public MainScreen_14(User User) {
 		SET_IMG_Area();
 		SET_Pannels_Area();
 		SET_Label_Area();
 		
-		users=User;
+		this.user = User;
 		
 		jf.setSize(360, 600);
 		
@@ -76,7 +76,7 @@ public class MainScreen_14 {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				new Money_account_15(users).sidepoint(jf.getLocation());
+				new Money_account_15(user).sidepoint(jf.getLocation());
 			}
 		});
 		jb.setSize(15,600);
@@ -125,7 +125,7 @@ public class MainScreen_14 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				new Budget_Set1_16(users).point(jf.getLocation());
+				new Budget_Set1_16(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -134,7 +134,7 @@ public class MainScreen_14 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				new LedgerBoardInput_21(users).point(jf.getLocation());
+				new LedgerBoardInput_21(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -143,7 +143,7 @@ public class MainScreen_14 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				new CardRegist_27(users).point(jf.getLocation());
+				new CardRegist_27(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -170,7 +170,7 @@ public class MainScreen_14 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				new MenuView_28(users).point(jf.getLocation());
+				new MenuView_28(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});

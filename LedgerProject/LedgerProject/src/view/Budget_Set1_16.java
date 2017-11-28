@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.LineBorder;
 
+import model.User;
 import model.UserDAO;
 
 public class Budget_Set1_16 {
@@ -23,13 +24,13 @@ public class Budget_Set1_16 {
 	JPanel sub = new JPanel();
 	JLabel jl[] = new JLabel[5];
 	
-	UserDAO users = new UserDAO();
+	User user;
 
-	public Budget_Set1_16(UserDAO user) {
+	public Budget_Set1_16(User User) {
 		SET_Text_And_Label_Area();
 		SET_IMG_Area();
 		SET_Label_Area();
-		users=user;
+		this.user=User;
 		jf.setSize(360, 600);
 		jp.setBackground(new Color(117, 102, 205));
 		jp.setLayout(null);
@@ -147,7 +148,7 @@ public class Budget_Set1_16 {
 		jl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new MainScreen_14(users).point(jf.getLocation());
+				new MainScreen_14(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -170,7 +171,7 @@ public class Budget_Set1_16 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				new Budget_Set1_17(users).point(jf.getLocation());
+				new Budget_Set1_17(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});

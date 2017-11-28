@@ -12,19 +12,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import model.User;
 import model.UserDAO;
 
 public class LedgerBoardInput_21 {
 	JFrame jf = new JFrame("¿ëµ·Á¶");
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
-	UserDAO users = new UserDAO();
+	User user;
 	
-	public LedgerBoardInput_21(UserDAO user) {
+	public LedgerBoardInput_21(User User) {
 		SET_Title_Area();	
 		SET_Content_Area();
 		
-		users=user;
+		this.user=User;
 		jf.setSize(360, 600);
 		jp.setLayout(null);
 		jf.add(jp);
@@ -42,7 +43,7 @@ public class LedgerBoardInput_21 {
 		jl_back.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new MainScreen_14(users).point(jf.getLocation());
+				new MainScreen_14(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -64,7 +65,7 @@ public class LedgerBoardInput_21 {
 		jl_menu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new CategoryBoard_22(users).point(jf.getLocation());
+				new CategoryBoard_22(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -173,7 +174,7 @@ public class LedgerBoardInput_21 {
 			more[i].addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					new CategoryList_23(users,str).point(jf.getLocation());
+					new CategoryList_23(user,str).point(jf.getLocation());
 					jf.setVisible(false);
 				}
 			});

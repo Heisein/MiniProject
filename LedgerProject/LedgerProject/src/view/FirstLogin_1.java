@@ -12,13 +12,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import model.User;
 import model.UserDAO;
 
 public class FirstLogin_1 {
 	JFrame jf = new JFrame("¿ëµ·Á¶");
 	JPanel jp = new JPanel();
 	
-	UserDAO users = new UserDAO();
+	User user;
 	
 	public FirstLogin_1() {
 		

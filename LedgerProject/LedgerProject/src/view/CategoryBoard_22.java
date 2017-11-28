@@ -16,6 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import model.User;
 import model.UserDAO;
 
 //소비이력입력
@@ -24,9 +25,9 @@ public class CategoryBoard_22 {
 	JFrame jf = new JFrame("용돈조");
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
-	UserDAO users=new UserDAO();
+	User user;
 
-	public CategoryBoard_22(UserDAO user) {
+	public CategoryBoard_22(User User) {
 		jf.setSize(360, 600);
 		jp.setBackground(new Color(117, 102, 205));
 		jp.setLayout(null);
@@ -36,7 +37,7 @@ public class CategoryBoard_22 {
 		jf.add(jp);
 		jf.setVisible(true);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		 users= user;
+		this.user=User;
 	}
 
 	public void SET_IMG_Area() {
@@ -51,7 +52,7 @@ public class CategoryBoard_22 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				new LedgerBoardInput_21(users).point(jf.getLocation());
+				new LedgerBoardInput_21(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -158,7 +159,7 @@ public class CategoryBoard_22 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				new LedgerBoardInput_21(users).point(jf.getLocation());
+				new LedgerBoardInput_21(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});

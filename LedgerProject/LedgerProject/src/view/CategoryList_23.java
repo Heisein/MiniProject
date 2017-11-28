@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import model.User;
 import model.UserDAO;
 
 public class CategoryList_23 {
@@ -24,13 +25,13 @@ public class CategoryList_23 {
 	JPanel sub1 =new JPanel();
 	String categoty;
 	
-	UserDAO users=new UserDAO();
+	User user;
 	
-	public CategoryList_23(UserDAO user,String cate) {
+	public CategoryList_23(User User,String cate) {
 		jf.setSize(360,600);
 		jf.setTitle("¿ëµ·Á¶");
-		this.categoty=categoty;
-		
+		this.categoty=cate;
+		this.user=User;
 		SET_IMG_Area();
 		SET_Label_Area();
 		SET_Text_And_Label_Area1();
@@ -108,7 +109,7 @@ public class CategoryList_23 {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					// TODO Auto-generated method stub
-					new CategoryDetail_24(users).point(jf.getLocation());
+					new CategoryDetail_24(user).point(jf.getLocation());
 				}
 			});
 	    }
@@ -175,7 +176,7 @@ public class CategoryList_23 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				new LedgerBoardInput_21(users).point(jf.getLocation());
+				new LedgerBoardInput_21(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -207,7 +208,7 @@ public class CategoryList_23 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				new LedgerBoardInput_21(users).point(jf.getLocation());
+				new LedgerBoardInput_21(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});

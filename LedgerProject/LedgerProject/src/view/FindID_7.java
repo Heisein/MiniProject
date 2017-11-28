@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import model.User;
 import model.UserDAO;
 
 public class FindID_7 {
@@ -18,7 +19,7 @@ public class FindID_7 {
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
 	JLabel jl[] = new JLabel[5];
-	UserDAO users = new UserDAO();
+	User user;
 
 	public FindID_7() {
 

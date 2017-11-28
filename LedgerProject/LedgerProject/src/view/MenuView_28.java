@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.event.*;
 import javax.swing.*;
 
+import model.User;
 import model.UserDAO;
 
 public class MenuView_28 {
@@ -13,10 +14,10 @@ public class MenuView_28 {
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
 	JLabel jl[] = new JLabel[2];
-	UserDAO users = new UserDAO();
+	User user;
 
-	public MenuView_28(UserDAO user) {
-		users=user;
+	public MenuView_28(User User) {
+		this.user=User;
 		Set_setting();
 		SET_IMG_Area();
 		SET_Label_Area();
@@ -70,7 +71,7 @@ public class MenuView_28 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				new StatView_29(users).point(jf.getLocation());
+				new StatView_29(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -165,7 +166,7 @@ public class MenuView_28 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				new MainScreen_14(users);
+				new MainScreen_14(user);
 				jf.setVisible(false);
 			}
 		});

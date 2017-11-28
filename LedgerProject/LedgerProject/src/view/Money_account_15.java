@@ -8,6 +8,7 @@ import java.io.*;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.swing.*;
 
+import model.User;
 import model.UserDAO;
 
 public class Money_account_15 {
@@ -15,9 +16,9 @@ public class Money_account_15 {
 	JFrame jf = new JFrame("¿ëµ·Á¶");
 	JPanel jp = new JPanel();
 	
-	UserDAO users = new UserDAO();
+	User user;
 
-	public Money_account_15(UserDAO user) {
+	public Money_account_15(User User) {
 		SET_Pannels_Area();
 		SET_Label_Area();
 
@@ -30,7 +31,7 @@ public class Money_account_15 {
 		jf.setVisible(true);
 		jp.setVisible(true);
 		
-		users=user;
+		this.user=User;
 	}
 
 	public void SET_Pannels_Area() {
@@ -112,7 +113,7 @@ public class Money_account_15 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				new MenuView_28(users).point(jf.getLocation());
+				new MenuView_28(user).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
