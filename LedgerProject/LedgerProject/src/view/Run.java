@@ -8,7 +8,7 @@ public class Run {
 		//new LedgerBoard(null);
 		//new LedgerBoard(u);
 		
-		new MainScreen_14();
+		new FirstLogin_1();
 		
 		//new CategoryBoard();
 		//new CategoryList();
