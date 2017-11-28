@@ -1,14 +1,29 @@
 package view;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.Set;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dialog;
+import java.awt.Font;
+import java.awt.LayoutManager;
+import java.awt.Point;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.imageio.stream.FileImageOutputStream;
-import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
+
+import model.User;
+import model.UserDAO;
 
 public class FindID_7 {
 	
@@ -16,6 +31,8 @@ public class FindID_7 {
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
 	JLabel jl[] = new JLabel[5];
+	JTextArea jta[] = new JTextArea[3];
+	UserDAO users = new UserDAO();
 
 	public FindID_7() {
 
@@ -31,6 +48,7 @@ public class FindID_7 {
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+
 	public void SET_Text_And_Label_Area() {//회원 가입 영역
 		
 		sub.setSize(360, 450);
@@ -45,23 +63,25 @@ public class FindID_7 {
 		jl_intro.setBorder(new LineBorder(Color.GRAY));
 		sub.add(jl_intro);
 		
-		JTextArea jta[] = new JTextArea[3];
+		
 		jta[0] = new JTextArea("이름 입력");
-		jta[1] = new JTextArea("생년월일(6자리입력)");
+		jta[1] = new JTextArea("생년월일 입력");
 		jta[2] = new JTextArea("휴대전화 ");
 		
-		
-//		
+//입력창	
 		JLabel jl[] = new JLabel[3];
 		jl[0] = new JLabel("이름 입력");
 		jl[1] = new JLabel("생년월일 입력");
 		jl[2] = new JLabel("전화번호 입력");
+		
+		
 
 		for (int i = 0; i < 3; i++) {
 			jl[i].setLocation(20, 40 + (80 * i));
 			jta[i].setLocation(20, 70 + (80 * i));
 		}
 		jta[2].setLocation(140, 230);
+		
 //체크박스 영역
 		JCheckBox jcb = new JCheckBox("본인 확인을 위한 약관에 동의합니다.");
 		jcb.setSize(340, 30);
@@ -136,7 +156,7 @@ public class FindID_7 {
 
 	
 	public void SET_IMG_Area() {
-		ImageIcon img = new ImageIcon("back.png");
+		ImageIcon img = new ImageIcon("images/back.png");
 		JLabel jl = new JLabel(img);
 		jl.setSize(50, 50);
 		jl.setLocation(5, 5);
@@ -172,10 +192,18 @@ public class FindID_7 {
 			jp.add(jl[i]);
 		}
 		jl[1].addMouseListener(new MouseAdapter() {
+			
+			// 아이디 찾기 Dialog
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				new FindIDResult_9().point(jf.getLocation());
+				User User = users.findId(jta[0].getText(), jta[2].getText());
+		        String str=User.getUserID();
+		            
+		        JOptionPane.showMessageDialog(jf, "회원님의 아이디는 "+str+" 입니다.");
+		            
+		        new Login_2().point(jf.getLocation());
+
+				
 				jf.setVisible(false);
 			}
 		});
@@ -187,3 +215,4 @@ public class FindID_7 {
 	 }
 
 }
+

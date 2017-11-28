@@ -131,6 +131,7 @@ public class Login_2 {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
 				jl[0].setText("");
+				new FindID_7();
 			}
 		});
 
@@ -139,6 +140,7 @@ public class Login_2 {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
 				jl[1].setText("");
+				new FindPWD_10();
 			}
 		});
 

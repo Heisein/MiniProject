@@ -24,6 +24,8 @@ public class UserDAO {
 		this.users = users;
 	}
 
+	
+	
 	public User findUsers(String userId) {
 		for (int i = 0; i < users.size(); i++) {
 			if ((userId.equals(users.get(i).getUserID()))) {
@@ -33,7 +35,21 @@ public class UserDAO {
 		
 		return null;
 	}
-
+	
+	
+	// 아이디 찾기
+	public User findId(String userName, String userPhone) {
+		for (int i = 0; i < users.size(); i++) {
+			if ((userName.equals(users.get(i).getUserName()))  ) {
+				if((userPhone.equals(users.get(i).getUserPhone())))	
+				return users.get(i);
+			}
+		}
+		
+		return null;
+	}
+	
+	
 	public String insertUser(String userId, String userPwd, String userName, String userPhone) {
 		if (!checkUser(userId)) {
 			users.add(new User(userId, userPwd, userName, userPhone));
