@@ -18,17 +18,22 @@ public class MainScreen_14 {
 		SET_Pannels_Area();
 		SET_Label_Area();
 		
-		jf.setSize(370, 600);
+		jf.setSize(360, 600);
 		
+		jp.setSize(360, 600);
 		jp.setBackground(new Color(117, 102, 205));
 		jp.setLayout(null);
 		
 		ScrollPane sp = new ScrollPane();
-		sp.add(jp);
-		jp.setPreferredSize(new Dimension(320,600));
+		sp.setLocation(0, 60);
+		sp.setSize(320, 600);
+		sp.setPreferredSize(new Dimension(360, 600));
 		
-		jf.add(sp);
+		sp.add(jp);
+
+		jf.add(jp);
 		jf.setVisible(true);
+		jp.setVisible(true);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -57,11 +62,11 @@ public class MainScreen_14 {
 			sub[i].setLayout(null);
 		}
 		
-		sub[0].setSize(300,92);
+		sub[0].setSize(320,92);
 		sub[0].setLocation(15,304);
-		sub[1].setSize(300,50);
+		sub[1].setSize(320,50);
 		sub[1].setLocation(15,402);
-		sub[2].setSize(300,92);
+		sub[2].setSize(320,92);
 		sub[2].setLocation(15,458);
 		
 		JLabel jl[] = new JLabel[8];
@@ -74,11 +79,11 @@ public class MainScreen_14 {
 			jl[i].setVisible(true);
 		}
 		
-		ImageIcon img = new ImageIcon("images/button.png");
+		ImageIcon img = new ImageIcon("plus.png");
 		for(int i = 5 ; i < 8;i++)
 		{
 			jl[i]=new JLabel(img);
-			jl[i].setSize(30,30);
+			jl[i].setSize(20,20);
 			jl[i].setVisible(true);
 			
 		}
@@ -94,34 +99,9 @@ public class MainScreen_14 {
 		jl[4].setText("카드를 등록해 카드혜택을 확인하세요");
 		jl[4].setLocation(10, 50);
 		
-		jl[5].setLocation(260, 30);
-		jl[6].setLocation(260, 10);
-		jl[7].setLocation(260, 30);
-		
-		jl[5].addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				new StatView_29();
-				jf.setVisible(false);
-			}
-		});
-		jl[6].addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				new LedgerBoardInput_21();
-				jf.setVisible(false);
-			}
-		});
-		jl[7].addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				new CardRegist_27();
-				jf.setVisible(false);
-			}
-		});
+		jl[5].setLocation(290, 40);
+		jl[6].setLocation(290, 20);
+		jl[7].setLocation(290, 40);
 
 		sub[0].add(jl[0]);
 		sub[0].add(jl[1]);
@@ -140,7 +120,7 @@ public class MainScreen_14 {
 		jl[1] = new JLabel(img);
 
 		jl[0].setLocation(20, -20);
-		jl[1].setLocation(260, -20);
+		jl[1].setLocation(270, -20);
 
 		for (int i = 0; i < jl.length; i++) {
 			jl[i].setSize(100, 100);
