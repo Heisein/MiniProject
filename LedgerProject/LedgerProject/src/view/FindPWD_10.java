@@ -10,19 +10,26 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import view.showPopup2.MyWinListener;
+
 public class FindPWD_10 {
 	
 	JFrame jf = new JFrame("용돈조");
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
 	JLabel jl[] = new JLabel[5];
+	FindPWD_10 findpwd;
+	Findpwd find;
 
+	public static void main(String[] args) {
+		new FindPWD_10();
+	}
+	
 	public FindPWD_10() {
-
+		this.findpwd=this;
 		SET_Text_And_Label_Area();
 		SET_IMG_Area();
 		SET_Label_Area();
-		
 		jf.setSize(360, 600);
 		jp.setBackground(new Color(117, 102, 205));
 		jp.setLayout(null);
@@ -137,8 +144,15 @@ public class FindPWD_10 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				new Login_2().point(jf.getLocation());
-				jf.setVisible(false);
+				if(e.getSource()==jl) {
+					if(find==null) {
+						find= new Findpwd(jf, "", findpwd);
+					}
+					find.setVisible(true);
+					jl.requestFocus();
+				}
+				/*new Login_2().point(jf.getLocation());
+				jf.setVisible(false);*/
 			}
 		});
 
@@ -172,10 +186,99 @@ public class FindPWD_10 {
 			}
 		});
 	}
-	public void point(Point p) {
-	      if (p != null) {
-	         jf.setLocation(p);
-	   }
-	 }
 
+	public void toLogin_2Class() {
+		jf.setVisible(false);
+		new Login_2();
+	}
+	public void stayClass() {
+		jf.setVisible(false);
+		new FindPWD_10();
+	}
+	public void point(Point p) {
+		if (p != null) {
+			jf.setLocation(p);
+		}
+	}
+
+
+}
+class Findpwd extends JDialog implements ActionListener {
+	JPanel jp = new JPanel();
+	JPanel sub = new JPanel();
+	JLabel confirm[] =new JLabel[2];
+	JButton yes;
+	JButton no;
+	FindPWD_10 findpwd;
+	
+	
+	public Findpwd(Frame parent, String str, FindPWD_10 findpwd) {
+		super(parent,str,true);
+		this.findpwd=findpwd;
+		
+		//입력 취소 여부 묻는 라베들
+		confirm[0]=new JLabel("입력하신 정보가 삭제됩니다");
+		confirm[1]=new JLabel("아이디 찾기를 취소하시겠습니까?");
+		for(int i=0; i<confirm.length;i++) {
+			confirm[i].setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+			confirm[i].setSize(250, 30);
+			jp.add(confirm[i]);
+		}
+		confirm[0].setLocation(50,20);
+		confirm[1].setLocation(30,50);
+		
+		sub.setSize(300, 65);
+		sub.setLocation(0, 97);
+		sub.setVisible(true);
+		sub.setBackground(Color.white);
+		sub.setLayout(null);
+		
+		//그대로 화면에 남기
+		no =new JButton("아니오");
+		no.addActionListener(this);
+		no.setSize(145,60);
+		no.setBackground(new Color(210, 177, 233));
+		no.setForeground(Color.white);
+		no.setLocation(0,5);
+		no.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		no.setLocation(0,5);
+
+		//로그인 화면으로 돌아가기
+		yes= new JButton("예");		
+		yes.addActionListener(this);
+		yes.setLocation(145,5);
+		yes.setSize(145,60);
+		yes.setBackground(new Color(210, 177, 233));
+		yes.setForeground(Color.white);
+		yes.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		
+		
+		sub.add(no);
+		sub.add(yes);
+		jp.add(sub);
+		jp.setBackground(Color.white);
+		jp.setLayout(null);
+
+		setSize(300,200);
+		add(jp);
+		addWindowListener(new MyWinListener());
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == yes) {
+			findpwd.toLogin_2Class();
+		}
+		if(e.getSource()==no) {
+			findpwd.stayClass();
+		}
+		dispose(); //대화상자 제거
+	}
+	class MyWinListener extends WindowAdapter{
+		public void windowClosing(WindowEvent e) {
+			dispose();
+		}
+	}
+	
+	
 }

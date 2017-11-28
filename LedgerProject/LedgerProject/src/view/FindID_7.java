@@ -1,13 +1,25 @@
 package view;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.Set;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-import javax.imageio.stream.FileImageOutputStream;
-import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 
 public class FindID_7 {
@@ -16,9 +28,12 @@ public class FindID_7 {
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
 	JLabel jl[] = new JLabel[5];
-
+	FindID_7 findidtemp;
+	showPopup2 show;
+	
 	public FindID_7() {
-
+		this.findidtemp=this;
+		toLogin_2Class();
 		SET_Text_And_Label_Area();
 		SET_IMG_Area();
 		SET_Label_Area();
@@ -135,24 +150,6 @@ public class FindID_7 {
 	}
 
 	
-	public void SET_IMG_Area() {
-		ImageIcon img = new ImageIcon("back.png");
-		JLabel jl = new JLabel(img);
-		jl.setSize(50, 50);
-		jl.setLocation(5, 5);
-		jl.setVisible(true);
-		jl.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				new Login_2().point(jf.getLocation());
-				jf.setVisible(false);
-			}
-		});
-
-		jp.add(jl);
-	}
-	
 	public void SET_Label_Area() {//기타 라벨 영역
 		JLabel jl[] = new JLabel[2];
 		
@@ -186,4 +183,116 @@ public class FindID_7 {
 	   }
 	 }
 
+	public void SET_IMG_Area() {
+		ImageIcon img = new ImageIcon("back.png");
+		JLabel jl = new JLabel(img);
+		jl.setSize(50, 50);
+		jl.setLocation(5, 5);
+		jl.setVisible(true);
+		jl.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getSource()==jl) {
+					if(show==null) {
+						show= new showPopup2(jf, "", findidtemp);
+					}
+					show.setVisible(true);
+					jl.requestFocus();
+				}
+				/*new Login_2().point(jf.getLocation());
+				jf.setVisible(false);*/
+			}
+		});
+		
+		jp.add(jl);
+	}
+	
+	public void toLogin_2Class() {
+		jf.setVisible(false);
+		new Login_2();
+	}
+	
+	public static void main(String[] args) {
+		new FindID_7();
+	}
+}
+
+class showPopup2 extends JDialog implements ActionListener {
+	JPanel jp = new JPanel();
+	JPanel sub = new JPanel();
+	JLabel confirm[] =new JLabel[2];
+	JButton yes;
+	JButton no;
+	FindID_7 findidtemp;
+	
+	
+	public showPopup2(Frame parent, String str, FindID_7 findidtemp) {
+		super(parent,str,true);
+		this.findidtemp=findidtemp;
+		
+		//입력 취소 여부 묻는 라베들
+		confirm[0]=new JLabel("입력하신 정보가 삭제됩니다");
+		confirm[1]=new JLabel("아이디 찾기를 취소하시겠습니까?");
+		for(int i=0; i<confirm.length;i++) {
+			confirm[i].setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+			confirm[i].setSize(250, 30);
+			jp.add(confirm[i]);
+		}
+		confirm[0].setLocation(50,20);
+		confirm[1].setLocation(30,50);
+		
+		sub.setSize(300, 65);
+		sub.setLocation(0, 97);
+		sub.setVisible(true);
+		sub.setBackground(Color.white);
+		sub.setLayout(null);
+		
+		//그대로 화면에 남기
+//		no.addActionListener(this);
+		no =new JButton("아니오");
+		no.setSize(145,60);
+		no.setBackground(new Color(210, 177, 233));
+		no.setForeground(Color.white);
+		no.setLocation(0,5);
+		no.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		no.setLocation(0,5);
+
+		//로그인 화면으로 돌아가기
+
+		yes= new JButton("예");		
+		yes.addActionListener(this);
+		yes.setLocation(145,5);
+		yes.setSize(145,60);
+		yes.setBackground(new Color(210, 177, 233));
+		yes.setForeground(Color.white);
+		yes.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		
+		
+		sub.add(no);
+		sub.add(yes);
+		jp.add(sub);
+		jp.setBackground(Color.white);
+		jp.setLayout(null);
+
+		setSize(300,200);
+		add(jp);
+		addWindowListener(new MyWinListener());
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == yes) {
+			findidtemp.toLogin_2Class();
+		}
+		
+		dispose(); //대화상자 제거
+	}
+	class MyWinListener extends WindowAdapter{
+		public void windowClosing(WindowEvent e) {
+			dispose();
+		}
+	}
+	
+	
 }

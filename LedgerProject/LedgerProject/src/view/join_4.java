@@ -1,11 +1,19 @@
 package view;
 
 import java.awt.Color;
+
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
 import model.UserDAO;
+//JoinResult_6의 회원가입 성공 창을 팝업 창으로 바꾸어줌
 
 public class join_4 {
 	JFrame jf = new JFrame("용돈조");
@@ -23,12 +32,16 @@ public class join_4 {
 	JLabel jl[] = new JLabel[5];
 	JTextField[] jta = new JTextField[5];
 	UserDAO user = new UserDAO();
-
+	showPopup1 show;
+	join_4 jointemp;
+	
 	public join_4() {
+		this.jointemp=this;
 		SET_Text_And_Label_Area();
 		SET_IMG_Area();
 		SET_Label_Area();
-
+		toLogin_2Class();
+		
 		jf.setSize(360, 600);
 		jp.setBackground(new Color(117, 102, 205));
 		jp.setLayout(null);
@@ -94,7 +107,7 @@ public class join_4 {
 		jp.add(sub);
 
 		// 내용삭제 영역 [이벤트임]
-		jta[0].addMouseListener(new MouseAdapter() {
+		jta[0].addMouseListener(new MouseAdapter() { 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				jta[0].setText("");
@@ -183,11 +196,100 @@ public class join_4 {
 				String userPhone = jta[4].getText();
 				
 				System.out.println(user.insertUser(userId, userPwd, userName, userPhone));
-				new Login_2();
-				jf.dispose();
+
+				if(e.getSource()==jl[1]) {
+					if(show==null) {
+						show= new showPopup1(jf, "회원가입 완료", jointemp);
+					}
+					show.setVisible(true);
+					jl[1].requestFocus();
+				}
+				
+				
+//				new Login_2();
+//				jf.dispose();
 			}
 		});
 
 	}
+	public void toLogin_2Class() {
+		jf.setVisible(false);
+		new Login_2();
+	}
+	public static void main(String[] args) {
+		new join_4();
+	}
+}
 
+class showPopup1 extends JDialog implements ActionListener {
+	JPanel jp = new JPanel();
+	JPanel sub = new JPanel();
+	JLabel welcome = new JLabel();
+	JLabel showWelcome[]=new JLabel[2];
+	JButton GoingLogin;
+	join_4 jointemp;
+	
+	public showPopup1(Frame parent, String str, join_4 jointemp) {
+		super(parent,str,true);
+		this.jointemp = jointemp;
+		
+		//화면 상단에 환영합니다 문구 라벨
+		welcome = new JLabel("환영합니다");
+		welcome.setSize(100, 20);
+		welcome.setLocation(140, 10);
+		welcome.setFont(new Font("맑은 고딕", Font.PLAIN, 16));
+		welcome.setForeground(Color.white);
+		
+		//로그인 창으로 넘어가는 버튼
+		GoingLogin =new JButton("로그인 하러가기");
+		GoingLogin.setSize(355,45);
+		GoingLogin.setLocation(0, 410);
+		GoingLogin.addActionListener(this);
+		GoingLogin.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
+		GoingLogin.setBackground(new Color(117, 102, 205));
+		GoingLogin.setForeground(Color.white);
+
+		//환영합니다. 가입되셨습니다 보여주는 하얀 panel
+		sub.setSize(360, 350);
+		sub.setLocation(0, 60);
+		sub.setVisible(true);
+		sub.setBackground(Color.white);
+		sub.setLayout(null);
+		
+		//가입 성공 문구 보여주는 라벨들
+		showWelcome[0]= new JLabel("환영합니다.");
+		showWelcome[1]= new JLabel("성공적으로 가입되셨습니다.");
+		for(int i=0; i<showWelcome.length; i++) {
+			showWelcome[i].setFont(new Font("맑은 고딕", Font.PLAIN, 17));
+			showWelcome[i].setSize(300, 30);
+			sub.add(showWelcome[i]);
+		}
+		showWelcome[0].setLocation(130,140);
+		showWelcome[1].setLocation(80,170);
+		jp.add(sub);
+		jp.add(GoingLogin);
+		jp.add(welcome);
+		
+		jp.setBackground(new Color(117, 102, 205));
+		jp.setLayout(null);
+
+		setSize(360,500);
+		add(jp);
+		addWindowListener(new MyWinListener());
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == GoingLogin) {
+			jointemp.toLogin_2Class();
+		}
+		dispose(); //대화상자 제거
+	}
+	class MyWinListener extends WindowAdapter{
+		public void windowClosing(WindowEvent e) {
+			dispose();
+		}
+	}
+	
+	
 }
