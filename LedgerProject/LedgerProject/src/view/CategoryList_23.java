@@ -1,7 +1,13 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.ScrollPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -9,15 +15,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import model.UserDAO;
+
 public class CategoryList_23 {
 	JFrame jf =new JFrame("¿ëµ·Á¶");
 	JPanel jp =new JPanel();
 	JPanel sub =new JPanel();
 	JPanel sub1 =new JPanel();
+	String categoty;
 	
-	public CategoryList_23() {
+	UserDAO users=new UserDAO();
+	
+	public CategoryList_23(UserDAO user,String cate) {
 		jf.setSize(360,600);
 		jf.setTitle("¿ëµ·Á¶");
+		this.categoty=categoty;
+		
 		SET_IMG_Area();
 		SET_Label_Area();
 		SET_Text_And_Label_Area1();
@@ -31,10 +44,10 @@ public class CategoryList_23 {
 	
 	public void SET_Text_And_Label_Area1() {
 		
-		sub1.setSize(360, 70);
+		sub1.setSize(360, 40);
 		sub1.setLocation(0, 60);
 		sub1.setLayout(null);
-		JLabel label =new JLabel("ºäÆ¼ ¼Òºñ¾×");
+		JLabel label =new JLabel(categoty+" ¼Òºñ¾×");
 		label.setFont(new Font("¸¼Àº°íµñ",Font.PLAIN,12));
 		label.setForeground(Color.WHITE);
 		label.setSize(100,20);
@@ -43,7 +56,7 @@ public class CategoryList_23 {
 		label2.setFont(new Font("¸¼Àº°íµñ",Font.PLAIN,22));
 		label2.setForeground(Color.WHITE);
 		label2.setSize(100,20);
-		label2.setLocation(15,40);
+		label2.setLocation(215,10);
 		sub1.setBackground(new Color(117, 102, 205));
 		sub1.add(label);
 		sub1.add(label2);
@@ -52,9 +65,14 @@ public class CategoryList_23 {
 	}
 	public void SET_Text_And_Label_Area() {
 		sub.setSize(360, 600);
-		sub.setLocation(0, 130);
+		sub.setLocation(0, 100);
 		sub.setLayout(null);
 		sub.setBackground(Color.white);
+		
+	    ScrollPane sp = new ScrollPane();
+		sp.setLocation(0, 100);
+		sp.setSize(360, 600);
+		sp.setPreferredSize(new Dimension(360, 600));
 		
 		JLabel jl1[]=new JLabel[4];
 		jl1[0]=new JLabel("Åä¸®Çì¾î¼öÁö");
@@ -85,6 +103,14 @@ public class CategoryList_23 {
 	    	Line[i].setBorder(new LineBorder(Color.GRAY,5));
 		    Line[i].setSize(330,2);
 		    sub.add(Line[i]);
+		    jl1[i].addMouseListener(new MouseAdapter() {
+
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					new CategoryDetail_24(users).point(jf.getLocation());
+				}
+			});
 	    }
 	    Line[0].setLocation(10,50);
 	    Line[1].setLocation(10,100);
@@ -116,7 +142,7 @@ public class CategoryList_23 {
 	    for(int i=0; i<more.length; i++) {
 	    	more[i]=new JLabel(moreimg);
 	    	more[i].setSize(50,30);
-	    	sub.add(more[i]);
+	    	sp.add(more[i]);
 	    	
 	    }
 	    more[0].setLocation(305,12);
@@ -129,9 +155,12 @@ public class CategoryList_23 {
 	    sub.add(plus);
 		
 	    for(int i=0; i<jl1.length; i++) {
-			sub.add(jl1[i]);
+	    	sub.add(jl1[i]);
 		}
-		jp.add(sub);
+	    sub.setPreferredSize(new Dimension(360, 600));
+	    sp.add(sub);
+	    
+		jp.add(sp);
 	}
 	
 	
@@ -141,6 +170,15 @@ public class CategoryList_23 {
 		JLabel jl = new JLabel(img);
 		jl.setSize(50, 50);
 		jl.setLocation(5, 5);
+		jl.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				new LedgerBoardInput_21(users).point(jf.getLocation());
+				jf.setVisible(false);
+			}
+		});
 		jp.add(jl);
 	}
 	public void SET_Label_Area() {//±âÅ¸ ¶óº§ ¿µ¿ª
@@ -163,12 +201,22 @@ public class CategoryList_23 {
 			jl[i].setVisible(true);
 			jp.add(jl[i]);
 		}
-		
+		jl[1].addMouseListener(new MouseAdapter() {
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				new LedgerBoardInput_21(users).point(jf.getLocation());
+				jf.setVisible(false);
+			}
+		});
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new CategoryList_23();
-	}
 
+	public void point(Point p) {
+	      if (p != null) {
+	         jf.setLocation(p);
+	   }
+	 }
 }

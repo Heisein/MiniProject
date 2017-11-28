@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -11,15 +12,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import model.UserDAO;
+
 public class LedgerBoardInput_21 {
 	JFrame jf = new JFrame("용돈조");
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
+	UserDAO users = new UserDAO();
 	
-	public LedgerBoardInput_21() {
+	public LedgerBoardInput_21(UserDAO user) {
 		SET_Title_Area();	
 		SET_Content_Area();
 		
+		users=user;
 		jf.setSize(360, 600);
 		jp.setLayout(null);
 		jf.add(jp);
@@ -37,7 +42,7 @@ public class LedgerBoardInput_21 {
 		jl_back.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new MainScreen_14();
+				new MainScreen_14(users).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -59,7 +64,7 @@ public class LedgerBoardInput_21 {
 		jl_menu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new MenuView_28();
+				new CategoryBoard_22(users).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -159,15 +164,16 @@ public class LedgerBoardInput_21 {
 		    
 			
 			//상세보기
-			ImageIcon moreImg = new ImageIcon("images/arrow_right.png");
+			ImageIcon moreImg = new ImageIcon("images/more.png");
 			more[i] = new JLabel(moreImg);
 			more[i].setSize(50, 55);
 			more[i].setLocation(290, i*55);
 			more[i].setVisible(true);
-			more[0].addMouseListener(new MouseAdapter() {
+			String str=CateName[i].getText();
+			more[i].addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					new CategoryList_23();
+					new CategoryList_23(users,str).point(jf.getLocation());
 					jf.setVisible(false);
 				}
 			});
@@ -182,4 +188,9 @@ public class LedgerBoardInput_21 {
 		
 		jp.add(sub);
 	}
+	public void point(Point p) {
+	      if (p != null) {
+	         jf.setLocation(p);
+	   }
+	 }
 }

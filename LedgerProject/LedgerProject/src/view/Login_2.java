@@ -24,6 +24,7 @@ public class Login_2 {
 	JPanel jp = new JPanel();
 	JTextField jta[] = new JTextField[2];
 	JLabel jl[] = new JLabel[2];
+	
 	UserDAO users = new UserDAO();
 
 	public Login_2() {
@@ -77,7 +78,7 @@ public class Login_2 {
 
 	public void SET_IMG_Area() {
 
-		ImageIcon img = new ImageIcon("images/tree.png");
+		ImageIcon img = new ImageIcon("images/mainimg.png");
 		JLabel jl = new JLabel(img);
 		jl.setSize(200, 224);
 		jl.setLocation(75, 80);
@@ -107,7 +108,7 @@ public class Login_2 {
 				User loginUser = users.loginMethod(jta[0].getText(), userPwd);
 				if(loginUser != null){
 					System.out.println("로그인 성공!" + loginUser.getUserID());
-					new MainScreen_14();
+					new MainScreen_14(users).point(jf.getLocation());
 					jf.setVisible(false);
 				}else{
 					System.out.println("아이디 혹은 비밀번호가 틀렸습니다.");

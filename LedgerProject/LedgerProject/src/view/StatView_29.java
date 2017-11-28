@@ -7,15 +7,21 @@ import java.io.*;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.swing.*;
 
+import model.UserDAO;
+
 public class StatView_29 {
 
 	JFrame jf = new JFrame("용돈조");
 	JPanel jp = new JPanel();
 
-	public StatView_29() {
+	UserDAO users= new UserDAO();
+	
+	public StatView_29(UserDAO user) {
 		SET_Graph_Area();
 		SET_Pannels_Area();
 		SET_Label_Area();
+		
+		users=user;
 
 		jf.setSize(360, 600);
 
@@ -71,14 +77,11 @@ public class StatView_29 {
 
 	public void SET_Label_Area() {
 		JLabel jl[] = new JLabel[2];
-		ImageIcon img = new ImageIcon("images/menu.png");
-		ImageIcon img1 = new ImageIcon("images/back.png");
-		jl[0] = new JLabel(img1);
+		ImageIcon img = new ImageIcon("menu.png");
+		jl[0] = new JLabel("11월 소비액");
 		jl[1] = new JLabel(img);
 
-		jl[0].setSize(30, 30);
-		jl[1].setSize(30, 30);
-		jl[0].setLocation(30, -20);
+		jl[0].setLocation(20, -20);
 		jl[1].setLocation(270, -20);
 
 		for (int i = 0; i < jl.length; i++) {

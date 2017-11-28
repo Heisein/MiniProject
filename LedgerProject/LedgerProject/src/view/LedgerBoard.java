@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Point;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,9 +44,6 @@ public class LedgerBoard {
 	JLabel titleLabel = new JLabel();
 	showPopup pop; // 팝업창
 	LedgerBoard ledgerlo;
-	int totalExpense = 0; // 총 지출
-	int totalImpotation = 0; // 총 수입
-	DecimalFormat shapFormat = new DecimalFormat("#,###"); // 원표기 포맷 
 
 	LedgerDAO ledgerDAO; // 껀수 dao
 	ArrayList<Ledger> ledgers; // 건수
@@ -89,7 +87,9 @@ public class LedgerBoard {
 		plusLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				pop = new showPopup(jf, "사용 이력 추가", ledgerlo);
+				if (pop == null) {
+					pop = new showPopup(jf, "사용 이력 추가", ledgerlo);
+				}
 				pop.setVisible(true);
 			}
 		});
@@ -122,14 +122,14 @@ public class LedgerBoard {
 		jf.setSize(360, 600);
 		jf.setVisible(true);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
 	}
 
 	public void rePaint() { // 얘 불릴때마다 화면 다시그린다
 		Collections.sort(ledgers); // 이유는 모르겠는데 리버스 제대로안되서 소트(오름차순)먼저함
 		Collections.reverse(ledgers); // 내림차순으로 정렬시킴
 		ledgerDAO.saveLedger(); // 파일저장
-
+		
 		ledgerPanel.removeAll();
 		this.setLedgerList();
 		System.out.println("리페인트 실행!");
@@ -137,21 +137,16 @@ public class LedgerBoard {
 
 	// ledger 컬렉션에 있는걸 화면에 뿌려준다
 	public void setLedgerList() {
-		
 		JLabel[] locateLabel = new JLabel[ledgers.size()];
 		JLabel[] dateLabel = new JLabel[ledgers.size()];
 		JLabel[] payLabel = new JLabel[ledgers.size()];
 		JLabel[] moneyLabel = new JLabel[ledgers.size()];
-
+		
 		// ledger 불러올때마다 사이즈 다시그려줌!
 		ledgerPanel.setSize(360, 200 + (ledgers.size() * 55));
 		ledgerPanel.setPreferredSize(new Dimension(340, 200 + (ledgers.size() * 55)));
-
+		
 		System.out.println("재설정된 ledgerPanel : " + ledgerPanel.getSize());
-
-		// 매번 총지출,수입이 쌓이면 안되므로 setLedgerList 불러올때마다 초기화
-		totalExpense = 0;
-		totalImpotation = 0;
 		
 		for (int i = 0; i < ledgers.size(); i++) {
 			Ledger l = ledgers.get(i); // temp용으로 사용할 Ledger l
@@ -164,14 +159,14 @@ public class LedgerBoard {
 			// 일자 뿌려줌
 			String date = l.getDate();
 			String str = new String(
-					"20" + date.substring(0, 2) + "." + date.substring(2, 4) + "." + date.substring(4, 6) + " "
-							+ date.substring(6, 8) + ":" + date.substring(8, 10) + " " + l.getCategory());
+					"20" + date.substring(0, 2) + "." + date.substring(2, 4) + "." + date.substring(4, 6)
+					+ " " + date.substring(6, 8) + ":" + date.substring(8, 10) + " " + l.getCategory());
 
 			dateLabel[i] = new JLabel(str);
 			dateLabel[i].setFont(new Font("맑은 고딕", Font.PLAIN, 12));
 			dateLabel[i].setForeground(Color.GRAY);
 			dateLabel[i].setBounds(15, 25 + (i * 55), 200, 25);
-			
+
 			// 라인그어줌
 			JLabel line = new JLabel();
 			line.setBorder(new LineBorder(Color.GRAY, 5));
@@ -181,34 +176,34 @@ public class LedgerBoard {
 
 			// 소비금액 뿌려줌
 			payLabel[i] = new JLabel();
+			DecimalFormat shapFormat = new DecimalFormat("#,###"); // 원표기 포맷
 			int payInt = Integer.parseInt(l.getPay()); // 원표기용으로 읽어온 소비금액 int형으로 파싱
 			
-			String payStr;
+			String payStr;			
 			if (l.isExpense()) {
 				payLabel[i].setForeground(Color.RED); // 지출이면 빨강
 				payStr = "- " + shapFormat.format(payInt);
-				totalExpense += payInt; // 총지출에 더해줌
 			} else {
 				payLabel[i].setForeground(Color.BLUE); // 수입이면 파랑
 				payStr = "+ " + shapFormat.format(payInt);
-				totalImpotation += payInt; // 총수입에 더해줌
 			}
 			payLabel[i].setText(payStr);
 			payLabel[i].setFont(new Font("맑은 고딕", Font.PLAIN, 16));
 			int payX = 281 - (payStr.length() * 7);
-			if (l.isExpense())
-				payX += 4;
-			payLabel[i].setBounds(payX, 5 + (i * 55), payStr.length() * 10, 25);
+			if(l.isExpense()) payX += 4;
+			payLabel[i].setBounds(payX, 5 + (i*55), payStr.length()*10, 25);
 
 			ledgerPanel.add(line);
 			ledgerPanel.add(locateLabel[i]);
 			ledgerPanel.add(dateLabel[i]);
 			ledgerPanel.add(payLabel[i]);
-		} // eof
-		
-		System.out.println("총지출 : " + totalExpense);
-		System.out.println("총수입 : " + totalImpotation);
+		}
 	}
+	public void point(Point p) {
+	      if (p != null) {
+	         jf.setLocation(p);
+	   }
+	 }
 }
 
 // ================== 이하 추가하는 팝업창 클래스 ==========================
@@ -221,7 +216,7 @@ class showPopup extends JDialog implements ActionListener {
 
 	public showPopup(Frame parent, String str, LedgerBoard le) {
 		super(parent, str, true); // JDialog 생성자인듯
-		this.le = le; //
+		this.le = le; // 
 
 		this.setSize(360, 600);
 		addWindowListener(new MyWinListener());
@@ -385,7 +380,7 @@ class showPopup extends JDialog implements ActionListener {
 		commitLabel.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		commitLabel.setForeground(Color.white);
 
-		// 완료버튼 누르면
+		//완료버튼 누르면
 		commitLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -402,7 +397,7 @@ class showPopup extends JDialog implements ActionListener {
 				String str = (texts[0].getText() + "," + texts[1].getText() + "," + texts[2].getText() + "," + isExpense
 						+ "," + categoryCb.getSelectedItem());
 				System.out.println(str);
-
+				
 				// ledgerDAO에 insert
 				le.ledgerDAO.insertLedger(texts[0].getText(), texts[1].getText(), texts[2].getText(), isExpense,
 						categoryCb.getSelectedItem().toString(), memoArea.getText());

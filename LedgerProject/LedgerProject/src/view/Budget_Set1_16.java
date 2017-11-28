@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,17 +15,21 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.LineBorder;
 
+import model.UserDAO;
+
 public class Budget_Set1_16 {
 	JFrame jf = new JFrame("¿ëµ·Á¶");
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
 	JLabel jl[] = new JLabel[5];
+	
+	UserDAO users = new UserDAO();
 
-	public Budget_Set1_16() {
+	public Budget_Set1_16(UserDAO user) {
 		SET_Text_And_Label_Area();
 		SET_IMG_Area();
 		SET_Label_Area();
-
+		users=user;
 		jf.setSize(360, 600);
 		jp.setBackground(new Color(117, 102, 205));
 		jp.setLayout(null);
@@ -142,7 +147,7 @@ public class Budget_Set1_16 {
 		jl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new Terms_3();
+				new MainScreen_14(users).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -161,6 +166,15 @@ public class Budget_Set1_16 {
 		jl[0].setLocation(140, 20);
 		jl[0].setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 16));
 
+		jl[1].addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				super.mouseClicked(e);
+				new Budget_Set1_17(users).point(jf.getLocation());
+				jf.setVisible(false);
+			}
+		});
+		
 		jl[1].setSize(100, 20);
 		jl[1].setLocation(150, 525);
 		jl[1].setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 14));
@@ -175,4 +189,9 @@ public class Budget_Set1_16 {
 		}
 		jp.add(jl[2]);
 	}
+	public void point(Point p) {
+	      if (p != null) {
+	         jf.setLocation(p);
+	   }
+	 }
 }

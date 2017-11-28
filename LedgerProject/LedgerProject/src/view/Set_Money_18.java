@@ -2,6 +2,9 @@ package view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -11,12 +14,16 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import model.UserDAO;
+
 public class Set_Money_18 {
 	JFrame jf =new JFrame("¿ëµ·Á¶");
 	JPanel jp =new JPanel();
 	JPanel sub =new JPanel();
 	JPanel sub1 =new JPanel();
-	public Set_Money_18() {
+	UserDAO users = new UserDAO();
+	
+	public Set_Money_18(UserDAO user) {
 		SET_IMG_Area();
 		SET_Label_Area();
 		Show_Money();
@@ -27,6 +34,7 @@ public class Set_Money_18 {
 		jf.add(jp);
 		jf.setVisible(true);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		users=user;
 	}
 	
 	public void Show_Money() {
@@ -134,6 +142,14 @@ public class Set_Money_18 {
 		jl.setSize(50, 50);
 		jl.setLocation(5, 5);
 		jl.setVisible(true);
+		jl.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				super.mouseClicked(e);
+				new Budget_Set1_17(users).point(jf.getLocation());
+				jf.setVisible(false);
+			}
+		});
 		jp.add(jl);
 	}
 	public void SET_Label_Area() {//±âÅ¸ ¶óº§ ¿µ¿ª
@@ -150,6 +166,15 @@ public class Set_Money_18 {
 		jl[1].setLocation(150, 525);
 		jl[1].setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 14));
 
+		jl[1].addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				super.mouseClicked(e);
+				new MainScreen_14(users).point(jf.getLocation());
+				jf.setVisible(false);
+			}
+		});
+		
 		for (int i = 0; i < 2; i++) {
 			jl[i].setForeground(Color.WHITE);
 			jl[i].setVisible(true);
@@ -164,9 +189,10 @@ public class Set_Money_18 {
 		
 		
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new Set_Money_18();
-	}
 
+	public void point(Point p) {
+	      if (p != null) {
+	         jf.setLocation(p);
+	   }
+	 }
 }

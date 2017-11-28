@@ -6,12 +6,16 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
+import model.UserDAO;
+
 public class JoinResult_6 {
 
 	JFrame jf = new JFrame("¿ëµ·Á¶");
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
 	JLabel jl[] = new JLabel[2];
+	
+	UserDAO users = new UserDAO();
 	
 	public JoinResult_6(){
 		

@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -9,12 +10,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import model.UserDAO;
+
 public class Set_Cate_Money_19 {
 	JFrame jf =new JFrame("¿ëµ·Á¶");
 	JPanel jp =new JPanel();
 	JPanel sub =new JPanel();
 	JPanel sub1 =new JPanel();
-	public Set_Cate_Money_19() {
+	UserDAO users = new UserDAO();
+	
+	public Set_Cate_Money_19(UserDAO user) {
 		SET_IMG_Area();
 		SET_Label_Area();
 		Show_Money();
@@ -25,6 +30,7 @@ public class Set_Cate_Money_19 {
 		jf.add(jp);
 		jf.setVisible(true);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		users=user;
 	}
 	public void Show_Money() {
 		sub1.setSize(360,110);
@@ -222,9 +228,10 @@ public class Set_Cate_Money_19 {
 		
 		
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new Set_Cate_Money_19();
-	}
 
+	public void point(Point p) {
+	      if (p != null) {
+	         jf.setLocation(p);
+	   }
+	 }
 }

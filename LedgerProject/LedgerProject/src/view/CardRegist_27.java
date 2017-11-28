@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -24,12 +25,14 @@ public class CardRegist_27 {
 	JFrame jf = new JFrame("¿ëµ·Á¶");
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
+	
+	UserDAO users = new UserDAO();
 
-	public CardRegist_27() {
+	public CardRegist_27(UserDAO user) {
 		SET_Text_And_Label_Area();
 		SET_IMG_Area();
 		SET_Label_Area();
-
+		users=user;
 		jf.setSize(360, 600);
 		jp.setBackground(new Color(117, 102, 205));
 		jp.setLayout(null);
@@ -111,7 +114,7 @@ public class CardRegist_27 {
 		jl.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new Terms_3();
+				new MainScreen_14(users).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -125,15 +128,6 @@ public class CardRegist_27 {
 		jl[0] = new JLabel("Ä«µå µî·Ï");
 		jl[1] = new JLabel("È®ÀÎ");
 
-		jl[1].addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				new MainScreen_14();
-				jf.setVisible(false);
-			}
-		});
-		
 		jl[0].setSize(100, 20);
 		jl[0].setLocation(140, 20);
 		jl[0].setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 16));
@@ -145,6 +139,19 @@ public class CardRegist_27 {
 			jl[i].setForeground(Color.WHITE);
 			jp.add(jl[i]);
 		}
+		
+		jl[1].addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new MainScreen_14(users).point(jf.getLocation());
+				jf.setVisible(false);
+			}
+		});
 	}
+	public void point(Point p) {
+	      if (p != null) {
+	         jf.setLocation(p);
+	   }
+	 }
 
 }

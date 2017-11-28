@@ -10,13 +10,17 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import model.UserDAO;
+
 public class FindPWD_10 {
 	
 	JFrame jf = new JFrame("¿ëµ·Á¶");
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
 	JLabel jl[] = new JLabel[5];
-
+	
+	UserDAO users = new UserDAO();
+	
 	public FindPWD_10() {
 
 		SET_Text_And_Label_Area();

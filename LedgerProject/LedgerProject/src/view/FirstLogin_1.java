@@ -12,10 +12,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import model.UserDAO;
+
 public class FirstLogin_1 {
 	JFrame jf = new JFrame("¿ëµ·Á¶");
 	JPanel jp = new JPanel();
-
+	
+	UserDAO users = new UserDAO();
+	
 	public FirstLogin_1() {
 		
 		SET_Button_Area();
@@ -68,7 +72,7 @@ public class FirstLogin_1 {
 	}
 
 	public void SET_IMG_Area() {
-		ImageIcon img = new ImageIcon("images/tree.png");
+		ImageIcon img = new ImageIcon("images/mainimg.png");
 		JLabel jl = new JLabel(img);
 		jl.setSize(200, 224);
 		jl.setLocation(75, 80);

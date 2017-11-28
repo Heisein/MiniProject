@@ -2,6 +2,9 @@ package view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,19 +14,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+
+import model.UserDAO;
 //소비이력상세 편집
 public class CategoryDetailModify_25  {
 	JFrame jf = new JFrame("용돈조");
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
 	
-	public CategoryDetailModify_25() {
+	UserDAO users=new UserDAO();
+	
+	public CategoryDetailModify_25(UserDAO user) {
 		jf.setSize(360,600);
 		jf.setTitle("용돈조");
 		SET_IMG_Area();
 		SET_Text_And_Label_Area();
 		SET_Label_Area();
-		
+		users=user;
 		jp.setBackground(new Color(117, 102, 205));
 		jp.setLayout(null);
 		jf.add(jp);
@@ -135,11 +142,22 @@ public class CategoryDetailModify_25  {
 			jl[i].setVisible(true);
 			jp.add(jl[i]);
 		}
+
+		jl[1].addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				new LedgerBoardInput_21(users).point(jf.getLocation());
+				jf.setVisible(false);
+			}
+		});
 		
 	}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new CategoryDetailModify_25();
-	}
 
+	public void point(Point p) {
+	      if (p != null) {
+	         jf.setLocation(p);
+	   }
+	 }
 }

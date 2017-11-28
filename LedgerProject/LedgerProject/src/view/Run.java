@@ -5,7 +5,7 @@ import model.User;
 public class Run {
 	public static void main(String[] args) {
 		User u = new User("aa","aa","aa","aa");
-		//new LedgerBoard(null);
+		new Login_2();
 		//new LedgerBoard(u);
 		
 		//new CategoryBoard();

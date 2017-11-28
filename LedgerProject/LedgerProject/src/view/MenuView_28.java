@@ -2,17 +2,21 @@ package view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.*;
 import javax.swing.*;
+
+import model.UserDAO;
 
 public class MenuView_28 {
 	JFrame jf = new JFrame("¿ëµ·Á¶");
 	JPanel jp = new JPanel();
 	JPanel sub = new JPanel();
 	JLabel jl[] = new JLabel[2];
+	UserDAO users = new UserDAO();
 
-	public MenuView_28() {
-
+	public MenuView_28(UserDAO user) {
+		users=user;
 		Set_setting();
 		SET_IMG_Area();
 		SET_Label_Area();
@@ -66,7 +70,7 @@ public class MenuView_28 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				new FirstLogin_1();
+				new StatView_29(users).point(jf.getLocation());
 				jf.setVisible(false);
 			}
 		});
@@ -130,6 +134,7 @@ public class MenuView_28 {
 		jl[8].setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 16));
 		jl[8].setSize(200, 25);
 		jl[8].setLocation(20, 15);
+		
 
 		S_sub[0].add(jl[0]);
 		S_sub[0].add(jl[1]);
@@ -151,7 +156,7 @@ public class MenuView_28 {
 	}
 
 	public void SET_IMG_Area() {
-		ImageIcon img = new ImageIcon("back.png");
+		ImageIcon img = new ImageIcon("images/back.png");
 		JLabel jl = new JLabel(img);
 		jl.setSize(50, 50);
 		jl.setLocation(5, 5);
@@ -160,7 +165,7 @@ public class MenuView_28 {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				new FirstLogin_1();
+				new MainScreen_14(users);
 				jf.setVisible(false);
 			}
 		});
@@ -178,4 +183,9 @@ public class MenuView_28 {
 		jl[0].setVisible(true);
 		jp.add(jl[0]);
 	}
+	public void point(Point p) {
+	      if (p != null) {
+	         jf.setLocation(p);
+	   }
+	 }
 }
